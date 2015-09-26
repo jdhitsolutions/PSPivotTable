@@ -1,5 +1,5 @@
 # PSPivotTable
-A command to create an Excel-like Pivot table in the PowerShell console.
+A command to create an Excel-like Pivot table in the PowerShell console. Read this in Raw mode to fix formatting.
 
 NAME
     New-PSPivotTable
