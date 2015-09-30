@@ -36,7 +36,7 @@ Specify if you want to sort on the value or property name. The default is Value.
 PS C:\> $svc="Lanmanserver","Wuauserv","DNS","ADWS"
 PS C:\> $computers="chi-dc01","chi-dc02","chi-dc04"
 PS C:\> $data = Get-Service -name $svc -ComputerName $computers
-PS C:\> New-PSPivotTablee $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status -verbose | format-table -autosize
+PS C:\> New-PSPivotTable $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status -verbose | format-table -autosize
 
 Computername    ADWS     DNS Lanmanserver Wuauserv
 ------------    ----     --- ------------ --------
@@ -71,7 +71,7 @@ Display a table report that shows the count of each file type in each directory.
 
 PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | ConvertTo-HTML -title "Script Report" -CssUri C:\scripts\blue.css -PreContent "<H3>C:\Scripts</H3>" -PostContent "<H6>$(Get-Date)</H6>" | Out-File C:\work\Scripts.htm -Encoding ascii
 
-Create a pvot table similar to the example above and create an HTML report.
+Create a pivot table similar to the example above and create an HTML report.
 .EXAMPLE
 PS C:\Scripts> $files = dir -path c:\scripts\*.ps*,*.txt,*.zip,*.bat
 PS C:\Scripts> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
@@ -287,11 +287,11 @@ Process {
     Write-Progress -Activity $Activity -status "Pre-Processing"
     Write-Verbose "Creating a unique list based on $xLabel"
     <#
-      Filter out blanks. Uniqueness is case sensitive so we first do a 
-      quick filtering with Select-Object, then turn each of them to upper
-      case and finally get unique uppercase items. 
+      Filter out null values, but not blanks. Uniqueness is case sensitive 
+	  so we first do a quick filtering with Select-Object, then turn each 
+	  of them to upper case and finally get unique uppercase items. 
     #>
-    $unique = $Data | Where {$_.$xlabel} | 
+    $unique = $Data | Where {$_.$xlabel -ne $Null} | 
      Select-Object -ExpandProperty $xLabel -unique | foreach {
        $_.ToUpper()} | Select-Object -unique
          
@@ -360,6 +360,12 @@ Process {
                      Select-Object -ExpandProperty InputObject | foreach {
                         #add each item and set the value to 0
                         Write-Verbose "Setting $_ to 0"
+						
+						# Account for blank entries
+						If ([String]::IsNullOrEmpty($_)) {
+							$_ = "[NONE]"
+						}
+
                         $hash.add($_,0)
                      }
                      
@@ -367,6 +373,12 @@ Process {
                      $labelGroup | foreach {
                         $n = ($_.name).ToUpper()
                         Write-Verbose "$n = $($_.count)"
+						
+						# Account for blank names
+						If ([String]::IsNullOrEmpty($n)) {
+							$n = "[NONE]"
+						}
+
                         $hash.Add($n,$_.count)
 
                     } #foreach
@@ -386,6 +398,11 @@ Process {
                      Select-Object -ExpandProperty InputObject | foreach {
                         #add each item and set the value to 0
                         Write-Verbose "Setting $_ sum to 0"
+						
+						# Account for blank entries
+						If ([String]::IsNullOrEmpty($_)) {
+							$_ = "[NONE]"
+						}
                         $hash.add($_,0)
                      }
                      
@@ -407,6 +424,10 @@ Process {
                             $Value = [math]::Round($value,$round)
                         }
                        
+					   # Account for blank names
+					    If ([String]::IsNullOrEmpty($n)) {
+							$n = "[NONE]"
+						}
                         $hash.add($n,$value)
                     } #foreach
                    
