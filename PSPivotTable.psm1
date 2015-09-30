@@ -170,8 +170,8 @@ Create a pivot table for each entry type showing the count of each source. The r
 .NOTES
 NAME:     New-PSPivotTable
 AUTHOR:   Jeffery Hicks (@JeffHicks)
-VERSION:  2.0
-LASTEDIT: 26 September 2015 
+VERSION:  2.1
+LASTEDIT: 30 September 2015 
 
 This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/
 
@@ -185,6 +185,7 @@ http://jdhitsolutions.com/blog/essential-powershell-resources/
   * DO NOT USE IT OUTSIDE OF A SECURE, TEST SETTING.             *
   ****************************************************************
 
+Thanks to kdoblosky for contributing to this module.
 .LINK
 Measure-Object
 Group-Object
