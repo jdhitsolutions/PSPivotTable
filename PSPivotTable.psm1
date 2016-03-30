@@ -5,10 +5,9 @@ Function New-PSPivotTable {
 
 <#
 .SYNOPSIS
-Create a pivot table in the PowerShell console
+Create a pivot table in the PowerShell console.
 .DESCRIPTION
-This command takes the result of a PowerShell expression and creates a pivot table object. You can use this object to analyze data patterns. 
-For example, you could get a directory listing and then prepare a table showing the size of different file extensions for each folder.
+This command takes the result of a PowerShell expression and creates a pivot table object. You can use this object to analyze data patterns. For example, you could get a directory listing and then prepare a table showing the size of different file extensions for each folder.
 .PARAMETER Data
 This is the collection of data object to analyze. You must enter a parameter value. See help examples.
 .PARAMETER yLabel
@@ -73,8 +72,8 @@ PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | 
 
 Create a pivot table similar to the example above and create an HTML report.
 .EXAMPLE
-PS C:\Scripts> $files = dir -path c:\scripts\*.ps*,*.txt,*.zip,*.bat
-PS C:\Scripts> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
+PS C:\> $files = dir -path c:\scripts\*.ps*,*.txt,*.zip,*.bat
+PS C:\> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
 
 Directory  .PS1  .PSM1 .PS1XML .PSSC  .PSD1     .TXT    .ZIP   .BAT
 ---------  ----  ----- ------- -----  -----     ----    ----   ----
@@ -83,7 +82,7 @@ C:\scripts 8542 500.88  137.82 11.95  9.16  22473.86 2402.63  26.32
 Analyse files by extension, measuring the total size of each extension. The value is formatted as KB to 2 decimal points.
 
 .EXAMPLE
-PS C:\scripts> New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
+PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
 
 Directory : C:\scripts
  PSSC     : 3
@@ -170,8 +169,8 @@ Create a pivot table for each entry type showing the count of each source. The r
 .NOTES
 NAME:     New-PSPivotTable
 AUTHOR:   Jeffery Hicks (@JeffHicks)
-VERSION:  2.1
-LASTEDIT: 30 September 2015 
+VERSION:  2.1.2
+LASTEDIT: 30 March 2016
 
 This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/
 

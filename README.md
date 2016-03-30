@@ -1,11 +1,11 @@
 # PSPivotTable
 A command to create an Excel-like Pivot table in the PowerShell console. Read this in Raw mode to fix formatting.
 
-NAME
+##NAME
     New-PSPivotTable
-SYNOPSIS
+##SYNOPSIS
     Create a pivot table in the PowerShell console
-SYNTAX
+##SYNTAX
     New-PSPivotTable [-Data] <Object> [-yLabel <String>] -yProperty <String> -xLabel <String>
     [-xProperty <String>] [<CommonParameters>]
     New-PSPivotTable [-Data] <Object> [-yLabel <String>] -yProperty <String> -xLabel <String>
@@ -13,12 +13,12 @@ SYNTAX
     New-PSPivotTable [-Data] <Object> [-yLabel <String>] -yProperty <String> -xLabel <String>
     [-Sum <String>] [-Format <String>] [-Round <Int32>] [-Sort <String>] [-SortKey <String>]
     [<CommonParameters>]
-DESCRIPTION
+##DESCRIPTION
     This command takes the result of a PowerShell expression and creates a pivot table object. You
     can use this object to analyze data patterns.
     For example, you could get a directory listing and then prepare a table showing the size of
     different file extensions for each folder.
-PARAMETERS
+##PARAMETERS
     -Data <Object>
         This is the collection of data object to analyze. You must enter a parameter value. See
         help examples.
@@ -113,9 +113,7 @@ PARAMETERS
         ErrorAction, ErrorVariable, WarningAction, WarningVariable,
         OutBuffer, PipelineVariable, and OutVariable. For more information, see
         about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-INPUTS
-OUTPUTS
-NOTES
+##NOTES
         NAME:     New-PSPivotTable
         AUTHOR:   Jeffery Hicks (@JeffHicks)
         VERSION:  2.0
@@ -136,19 +134,22 @@ NOTES
     PS C:\> $data = Get-Service -name $svc -ComputerName $computers
     PS C:\> new-pspivottable $data -ylabel Computername -yProperty Machinename -xlabel Name
     -xproperty Status -verbose | format-table -autosize
+    
     Computername    ADWS     DNS Lanmanserver Wuauserv
     ------------    ----     --- ------------ --------
     chi-dc01     Running Running      Running  Running
     chi-dc02     Running Stopped      Running  Running
     chi-dc04     Running Running      Running  Stopped
+    
     Create a table that shows the status of each service on each computer. The yLabel parameter
     renames the property so that instead of Machinename it shows Computername.
     The xLabel is the property name to analyze, in this case the service name. The xProperty value
     of each service becomes the table value.
     -------------------------- EXAMPLE 2 --------------------------
     PS C:\>$files = dir c:\scripts -include *.ps1,*.txt,*.zip,*.bat -recurse
-    PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | format-table
-    -auto
+    PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | 
+    format-table -auto
+
     Directory                                        .ZIP .BAT .PS1 .TXT
     ---------                                        ---- ---- ---- ----
     C:\scripts\AD-Old\New                               0    0    1    1
@@ -164,23 +165,31 @@ NOTES
     C:\scripts\quark                                    0    0    0    1
     C:\scripts\Toolmaking                               0    0   48    0
     C:\scripts                                         55   13 1133  305
+    
     Display a table report that shows the count of each file type in each directory.
+    
     PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | ConvertTo-HTML
     -title "Script Report" -CssUri C:\scripts\blue.css -PreContent "<H3>C:\Scripts</H3>"
     -PostContent "<H6>$(Get-Date)</H6>" | Out-File C:\work\Scripts.htm -Encoding ascii
+    
     Create a pvot table similar to the example above and create an HTML report.
+    
     -------------------------- EXAMPLE 3 --------------------------
     PS C:\Scripts>$files = dir -path c:\scripts\*.ps*,*.txt,*.zip,*.bat
     PS C:\Scripts> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length
     -round 2 -format kb | format-table -auto
+    
     Directory  .PS1  .PSM1 .PS1XML .PSSC  .PSD1     .TXT    .ZIP   .BAT
     ---------  ----  ----- ------- -----  -----     ----    ----   ----
     C:\scripts 8542 500.88  137.82 11.95  9.16  22473.86 2402.63  26.32
+    
     Analyse files by extension, measuring the total size of each extension. The value is formatted
     as KB to 2 decimal points.
+    
     -------------------------- EXAMPLE 4 --------------------------
     PS C:\scripts>new-pspivottable $files -yProperty Directory -xLabel Extension -Count -Sort
     Ascending
+    
     Directory : C:\scripts
      PSSC     : 3
      PSD1     : 7
@@ -190,12 +199,15 @@ NOTES
      ZIP      : 74
      TXT      : 443
      PS1      : 2077
+    
     Process the collection of script files and analyze by the count of each file type. The result
     is sorted by the count value in ascending order.
     Note that the actual output would include the period as part of the extension.
+    
     -------------------------- EXAMPLE 5 --------------------------
     PS C:\>$path = "\\chi-fp02\shared"
     Define a variable for a path to be analyzed.
+    
     PS C:\> $files = dir $path -recurse -File | Select *,
     @{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
     @{Name="Days";Expression={
@@ -210,12 +222,16 @@ NOTES
     } #switch
     }}
     Get all files and include some aging information based on the last write time.
+    
     PS C:\> new-pspivottable $files -yProperty Directory -xLabel Days -count | Out-GridView -title
     "File Aging"
+    
     Create a pivot table on the directory and aging buckets and display results with Out-Gridview.
+    
     -------------------------- EXAMPLE 6 --------------------------
     PS C:\>$data = get-eventlog system -newest 1000
     Get 1000 recent events from the System eventlog.
+    
     PS C:\> new-pspivottable -Data $data -Count -yProperty EntryType -xLabel Source | Out-Gridview
     -title "System Sources"
     Create a pivot table with a Y column of Entry Type and the X axis labels of the different
@@ -249,7 +265,7 @@ NOTES
     MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 28
     Create a pivot table for each entry type showing the count of each source. The results are
     sorted by the source name.
-RELATED LINKS
+##RELATED LINKS
     Measure-Object
     Group-Object
     Select-Object
