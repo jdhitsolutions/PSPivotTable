@@ -6,7 +6,7 @@ schema: 2.0.0
 
 # New-PSPivotTable
 ## SYNOPSIS
-Create a pivot table in the PowerShell console.
+Create a pivot table in the PowerShell console from PowerShell commands.
 
 ## SYNTAX
 

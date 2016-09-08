@@ -5,7 +5,7 @@
 <command:details><command:name>New-PSPivotTable</command:name>
 <command:verb>New</command:verb>
 <command:noun>PSPivotTable</command:noun>
-<maml:description><maml:para>Create a pivot table in the PowerShell console.
+<maml:description><maml:para>Create a pivot table in the PowerShell console from PowerShell commands.
 </maml:para>
 </maml:description>
 </command:details>

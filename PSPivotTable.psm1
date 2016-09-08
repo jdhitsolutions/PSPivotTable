@@ -1,8 +1,6 @@
 #requires -version 4.0
 
-
 Function New-PSPivotTable {
-
 
 [cmdletbinding(DefaultParameterSetName = "Property")]
 

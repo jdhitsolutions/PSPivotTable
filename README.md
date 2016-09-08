@@ -9,7 +9,7 @@ A PowerShell function to create an Excel-like Pivot table in the PowerShell cons
 
 ## EXAMPLE
 
-    PS C:\>$svc="Lanmanserver","Wuauserv","DNS","ADWS"
+    PS C:\> $svc="Lanmanserver","Wuauserv","DNS","ADWS"
     PS C:\> $computers="chi-dc01","chi-dc02","chi-dc04"
     PS C:\> $data = Get-Service -name $svc -ComputerName $computers
     PS C:\> new-pspivottable $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status -verbose | format-table -autosize
@@ -22,4 +22,4 @@ A PowerShell function to create an Excel-like Pivot table in the PowerShell cons
     
 Create a table that shows the status of each service on each computer. The yLabel parameter renames the property so that instead of Machinename it shows Computername. The xLabel is the property name to analyze, in this case the service name. The xProperty value of each service becomes the table value.
 
-_Last updated: September 7, 2016_
+_Last updated: September 8, 2016_
