@@ -101,16 +101,11 @@ Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
 Default { 'Today' }
 } 
 }}
+
+PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | Out-GridView -title "File Aging"
 ```
 
-Get all files and include some aging information based on the last write time.
-
-```
-PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | 
-Out-GridView -title "File Aging"
-```
-
-Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.
+Get all files and include some aging information based on the last write time. Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.
 
 ### -------------------------- EXAMPLE 6 --------------------------
 ```
@@ -346,11 +341,18 @@ Default value: Value
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
 ## INPUTS
+
+### None
+
+This command does not accept any pipelined input.
 
 ## OUTPUTS
 
-[PSCustomObject]
+### PSCustomObject
+
+This command writes a custom object to the pipeline.
 
 ## NOTES
 * NAME:     New-PSPivotTable
