@@ -32,12 +32,11 @@ For example, you could get a directory listing and then prepare a table showing 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-
 ```
 PS C:\> $svc="Lanmanserver","Wuauserv","DNS","ADWS"
 PS C:\> $computers="chi-dc01","chi-dc02","chi-dc04"
 PS C:\> $data = Get-Service -name $svc -ComputerName $computers
-PS C:\> New-PSPivotTable $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status -verbose | format-table -autosize
+PS C:\> New-PSPivotTable $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status | format-table -autosize
 
 Computername    ADWS     DNS Lanmanserver Wuauserv
 ------------    ----     --- ------------ --------
@@ -52,39 +51,21 @@ The xLabel is the property name to analyze, in this case the service name.
 The xProperty value of each service becomes the table value.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-
 ```
 PS C:\> $files = dir c:\scripts -include *.ps1,*.txt,*.zip,*.bat -recurse
-PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -count | format-table -auto 
-
-Directory                                        .ZIP .BAT .PS1 .TXT
----------                                        ---- ---- ---- ----
-C:\scripts\AD-Old\New                               0    0    1    1
-C:\scripts\AD-Old                                   1    0   82    1
-C:\scripts\ADTFM-Scripts\LocalUsersGroups           0    0    8    0
-C:\scripts\ADTFM-Scripts                            0    0   55    3
-C:\scripts\en-US                                    0    0    1    0
-C:\scripts\GPAE                                     0    0    8    3
-C:\scripts\modhelp                                  1    0    0    0
-C:\scripts\PowerShellBingo                          0    0    4    0
-C:\scripts\PS-TFM                                   1    0   69    2
-C:\scripts\PSVirtualBox                             0    0    0    1
-C:\scripts\quark                                    0    0    0    1
-C:\scripts\Toolmaking                               0    0   48    0
-C:\scripts                                         55   13 1133  305
+PS C:\> New-PSPivotTable $files -yProperty Parent -xLabel Extension -count | Export-CSV -path c:\work\scriptdir.csv -notypeinformation
 ```
-
-Display a table report that shows the count of each file type in each directory.
+Create a report that shows the count of each file type in each top level directory and export to a CSV file.
 
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-PS C:\> $files = dir -path c:\scripts\*.ps*,*.txt,*.zip,*.bat
+PS C:\> $files = (dir -path c:\scripts -file).Where({$_.extension -match "ps1|txt|zip|bat|xml"})
 PS C:\> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
 
-Directory  .PS1  .PSM1 .PS1XML .PSSC  .PSD1     .TXT    .ZIP   .BAT
----------  ----  ----- ------- -----  -----     ----    ----   ----
-C:\scripts 8542 500.88  137.82 11.95  9.16  22473.86 2402.63  26.32
+Directory      .TXT   .PS1      .XML   .ZIP  .BAT .PS1XML
+---------      ----   ----      ----   ----  ---- -------
+C:\scripts 30422.99 9494.2 270941.55 159.71 26.62  139.57
 ```
 
 Analyse files by extension, measuring the total size of each extension. The value is formatted as KB to 2 decimal points.
@@ -94,14 +75,12 @@ Analyse files by extension, measuring the total size of each extension. The valu
 PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
 
 Directory : C:\scripts
- PSSC     : 3
- PSD1     : 7
- BAT      : 17
- PS1XML   : 24
- PSM1     : 50
- ZIP      : 74
- TXT      : 443
- PS1      : 2077
+.ZIP      : 15
+.BAT      : 18
+.PS1XML   : 25
+.XML      : 121
+.TXT      : 480
+.PS1      : 2288
 ```
 
 Process the collection of script files and analyze by the count of each file type.
@@ -109,9 +88,10 @@ The result is sorted by the count value in ascending order. Note that the actual
 
 ### -------------------------- EXAMPLE 5 --------------------------
 ```
-PS C:\> $files = dir $path -recurse -File | Select *, @{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
+PS C:\> $files = dir c:\scripts -recurse -File | 
+Select *, @{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
 @{Name="Bucket";Expression={
-Switch(\[int\]((Get-Date)-$_.LastWriteTime).TotalDays) {
+Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
 {$_ -gt 365} {'365Plus' ; Break}
 {$_ -gt 180 -AND $_ -le 365} {'1Yr' ; Break}
 {$_ -gt 90 -AND $_ -le 180} {'6Mo' ; Break}
@@ -125,13 +105,14 @@ Default { 'Today' }
 
 Get all files and include some aging information based on the last write time.
 
-### -------------------------- EXAMPLE 6 --------------------------
 ```
-PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | Out-GridView -title "File Aging"
+PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | 
+Out-GridView -title "File Aging"
 ```
-Create a pivot table on the directory and aging buckets and display results with Out-Gridview.
 
-### -------------------------- EXAMPLE 7 --------------------------
+Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.
+
+### -------------------------- EXAMPLE 6 --------------------------
 ```
 PS C:\> New-PSPivotTable -Data (get-eventlog system -newest 1000) -Count -yProperty EntryType -xLabel Source | Out-Gridview -title 'System Sources'
 ```
@@ -139,39 +120,60 @@ PS C:\> New-PSPivotTable -Data (get-eventlog system -newest 1000) -Count -yPrope
 Create a pivot table with a Y column of Entry Type and the X axis labels of the different sources based on the 1000 newest system event logs.
 The value under each column will be the total count of entries by source. The results are piped to Out-Gridview for viewing and further sorting or filtering.
 
-### -------------------------- EXAMPLE 8 --------------------------
+### -------------------------- EXAMPLE 7 --------------------------
 ```
-PS C:\> $e = ($data).Where({$_.EntryType -eq 'error'})
+PS C:\> $e = get-eventlog system -newest 1000 -entrytype Error
 PS C:\> New-PSPivotTable $e -yProperty EntryType -xLabel Source -count -sort Descending
 
-EntryType : Error
-SCHANNEL  : 36
-DCOM      : 23
-NTFS      : 5
-KERBEROS  : 1
-DISK      : 1
+EntryType                             : Error
+DCOM                                  : 915
+MICROSOFT-WINDOWS-WINDOWSUPDATECLIENT : 40
+SERVICE CONTROL MANAGER               : 15
+DISK                                  : 11
+EVENTLOG                              : 7
+SRV                                   : 4
+BTHUSB                                : 2
+KERBEROS                              : 2
+MICROSOFT-WINDOWS-NDIS                : 1
+AX88179                               : 1
+BUGCHECK                              : 1
+MICROSOFT-WINDOWS-HYPER-V-VMSWITCH    : 1
 ```
 
 Create a pivot table on the error source, sorted by count in descending order.
 
-### -------------------------- EXAMPLE 9 --------------------------
+### -------------------------- EXAMPLE 8 --------------------------
 ```
-PS C:\> $k = ($data).Where({$_.source -match 'kernel'})
+PS C:\> $k = Get-Eventlog -source *kernel* -logname System
 PS C:\> New-PSPivotTable $k -yProperty EntryType -xLabel Source -count -sort Ascending -SortKey Name
+
+EntryType                                : Information
+MICROSOFT-WINDOWS-KERNEL-BOOT            : 1120
+MICROSOFT-WINDOWS-KERNEL-GENERAL         : 2051
+MICROSOFT-WINDOWS-KERNEL-PNP             : 0
+MICROSOFT-WINDOWS-KERNEL-POWER           : 168
+MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 604
 
 EntryType                                : Warning
 MICROSOFT-WINDOWS-KERNEL-BOOT            : 0
 MICROSOFT-WINDOWS-KERNEL-GENERAL         : 0
-MICROSOFT-WINDOWS-KERNEL-PNP             : 36
+MICROSOFT-WINDOWS-KERNEL-PNP             : 784
 MICROSOFT-WINDOWS-KERNEL-POWER           : 0
-MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 48
+MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 1816
 
-EntryType                                : Information
-MICROSOFT-WINDOWS-KERNEL-BOOT            : 49
-MICROSOFT-WINDOWS-KERNEL-GENERAL         : 42
+EntryType                                : 0
+MICROSOFT-WINDOWS-KERNEL-BOOT            : 0
+MICROSOFT-WINDOWS-KERNEL-GENERAL         : 0
 MICROSOFT-WINDOWS-KERNEL-PNP             : 0
-MICROSOFT-WINDOWS-KERNEL-POWER           : 10
-MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 28
+MICROSOFT-WINDOWS-KERNEL-POWER           : 24
+MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 0
+
+EntryType                                : Error
+MICROSOFT-WINDOWS-KERNEL-BOOT            : 0
+MICROSOFT-WINDOWS-KERNEL-GENERAL         : 9
+MICROSOFT-WINDOWS-KERNEL-PNP             : 0
+MICROSOFT-WINDOWS-KERNEL-POWER           : 0
+MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 0
 ```
 Create a variable of all entries where the source includes 'kernel' in the name. Then create a pivot table for each entry type showing the count of each source. The results are sorted by the source name.
 
@@ -351,11 +353,10 @@ Accept wildcard characters: False
 [PSCustomObject]
 
 ## NOTES
-
 * NAME:     New-PSPivotTable
 * AUTHOR:   Jeffery Hicks (@JeffHicks)
 * VERSION:  2.1.3
-* LASTEDIT: 7 September 2016
+* LASTEDIT: 8 September 2016
 
 This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/
 
@@ -364,7 +365,6 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 Thanks to kdoblosky for contributing to this module.
 
 ## RELATED LINKS
-
 [Measure-Object]()
 [Group-Object]()
 [Select-Object]()
