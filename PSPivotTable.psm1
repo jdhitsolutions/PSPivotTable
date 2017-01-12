@@ -287,5 +287,3 @@ End {
 #define an optional alias
 Set-Alias -Name npt -Value New-PSPivotTable
 
-Export-ModuleMember -Function * -Alias *
-
