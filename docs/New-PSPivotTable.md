@@ -31,7 +31,7 @@ For example, you could get a directory listing and then prepare a table showing 
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 PS C:\> $svc="Lanmanserver","Wuauserv","DNS","ADWS"
 PS C:\> $computers="chi-dc01","chi-dc02","chi-dc04"
@@ -50,7 +50,8 @@ The yLabel parameter renames the property so that instead of Machinename it show
 The xLabel is the property name to analyze, in this case the service name.
 The xProperty value of each service becomes the table value.
 
-### -------------------------- EXAMPLE 2 --------------------------
+
+### EXAMPLE 2
 ```
 PS C:\> $files = dir c:\scripts -include *.ps1,*.txt,*.zip,*.bat -recurse
 PS C:\> New-PSPivotTable $files -yProperty Parent -xLabel Extension -count | Export-CSV -path c:\work\scriptdir.csv -notypeinformation
@@ -58,7 +59,8 @@ PS C:\> New-PSPivotTable $files -yProperty Parent -xLabel Extension -count | Exp
 Create a report that shows the count of each file type in each top level directory and export to a CSV file.
 
 
-### -------------------------- EXAMPLE 3 --------------------------
+
+### EXAMPLE 3 
 ```
 PS C:\> $files = (dir -path c:\scripts -file).Where({$_.extension -match "ps1|txt|zip|bat|xml"})
 PS C:\> New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
@@ -70,7 +72,8 @@ C:\scripts 30422.99 9494.2 270941.55 159.71 26.62  139.57
 
 Analyse files by extension, measuring the total size of each extension. The value is formatted as KB to 2 decimal points.
 
-### -------------------------- EXAMPLE 4 --------------------------
+
+### EXAMPLE 4
 ```
 PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
 
@@ -86,12 +89,12 @@ Directory : C:\scripts
 Process the collection of script files and analyze by the count of each file type.
 The result is sorted by the count value in ascending order. Note that the actual output would include the period as part of the extension.
 
-### -------------------------- EXAMPLE 5 --------------------------
+
+### EXAMPLE 5
 ```
-PS C:\> $files = dir c:\scripts -recurse -File | 
-Select *, @{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
-@{Name="Bucket";Expression={
-Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
+PS C:\> $files = dir c:\scripts -recurse -File | Select *, 
+@{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
+@{Name="Bucket";Expression={Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
 {$_ -gt 365} {'365Plus' ; Break}
 {$_ -gt 180 -AND $_ -le 365} {'1Yr' ; Break}
 {$_ -gt 90 -AND $_ -le 180} {'6Mo' ; Break}
@@ -107,15 +110,16 @@ PS C:\> New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | Out
 
 Get all files and include some aging information based on the last write time. Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.
 
-### -------------------------- EXAMPLE 6 --------------------------
+
+### EXAMPLE 6
 ```
 PS C:\> New-PSPivotTable -Data (get-eventlog system -newest 1000) -Count -yProperty EntryType -xLabel Source | Out-Gridview -title 'System Sources'
 ```
 
-Create a pivot table with a Y column of Entry Type and the X axis labels of the different sources based on the 1000 newest system event logs.
-The value under each column will be the total count of entries by source. The results are piped to Out-Gridview for viewing and further sorting or filtering.
+Create a pivot table with a Y column of Entry Type and the X axis labels of the different sources based on the 1000 newest system event logs. The value under each column will be the total count of entries by source. The results are piped to Out-Gridview for viewing and further sorting or filtering.
 
-### -------------------------- EXAMPLE 7 --------------------------
+
+### EXAMPLE 7
 ```
 PS C:\> $e = get-eventlog system -newest 1000 -entrytype Error
 PS C:\> New-PSPivotTable $e -yProperty EntryType -xLabel Source -count -sort Descending
@@ -137,7 +141,8 @@ MICROSOFT-WINDOWS-HYPER-V-VMSWITCH    : 1
 
 Create a pivot table on the error source, sorted by count in descending order.
 
-### -------------------------- EXAMPLE 8 --------------------------
+
+### EXAMPLE 8
 ```
 PS C:\> $k = Get-Eventlog -source *kernel* -logname System
 PS C:\> New-PSPivotTable $k -yProperty EntryType -xLabel Source -count -sort Ascending -SortKey Name
@@ -355,10 +360,10 @@ This command does not accept any pipelined input.
 This command writes a custom object to the pipeline.
 
 ## NOTES
-* NAME:     New-PSPivotTable
-* AUTHOR:   Jeffery Hicks (@JeffHicks)
-* VERSION:  2.1.3
-* LASTEDIT: 8 September 2016
+* NAME    : New-PSPivotTable
+* AUTHOR  : Jeffery Hicks (@JeffHicks)
+* VERSION : 2.1.5
+* UPDATED : 8 September 2016
 
 This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/
 
@@ -368,6 +373,8 @@ Thanks to kdoblosky for contributing to this module.
 
 ## RELATED LINKS
 [Measure-Object]()
+
 [Group-Object]()
+
 [Select-Object]()
 

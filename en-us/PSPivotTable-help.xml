@@ -1,342 +1,449 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<helpItems schema="maml">
-
-<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-<command:details><command:name>New-PSPivotTable</command:name>
-<command:verb>New</command:verb>
-<command:noun>PSPivotTable</command:noun>
-<maml:description><maml:para>Create a pivot table in the PowerShell console from PowerShell commands.
-</maml:para>
-</maml:description>
-</command:details>
-<maml:description><maml:para>This command takes the result of a PowerShell expression and creates a pivot table object. You can use this object to analyze data patterns. For example, you could get a directory listing and then prepare a table showing the size of different file extensions for each folder.
-</maml:para>
-</maml:description>
-<command:syntax><command:syntaxItem><maml:name>New-PSPivotTable</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Data</maml:name>
-<maml:Description><maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-<dev:type><maml:name>Object</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yLabel</maml:name>
-<maml:Description><maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yProperty</maml:name>
-<maml:Description><maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xLabel</maml:name>
-<maml:Description><maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xProperty</maml:name>
-<maml:Description><maml:para>The property name that you want to analyze for each object. This will be used for calculating table values. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-</command:syntaxItem>
-<command:syntaxItem><maml:name>New-PSPivotTable</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Data</maml:name>
-<maml:Description><maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-<dev:type><maml:name>Object</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yLabel</maml:name>
-<maml:Description><maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yProperty</maml:name>
-<maml:Description><maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xLabel</maml:name>
-<maml:Description><maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Count</maml:name>
-<maml:Description><maml:para>Instead of getting a property for each xLabel value, return a total count of each.
-</maml:para>
-</maml:Description>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Sort</maml:name>
-<maml:Description><maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SortKey</maml:name>
-<maml:Description><maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>Value</dev:defaultValue>
-</command:parameter>
-</command:syntaxItem>
-<command:syntaxItem><maml:name>New-PSPivotTable</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Data</maml:name>
-<maml:Description><maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-<dev:type><maml:name>Object</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yLabel</maml:name>
-<maml:Description><maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yProperty</maml:name>
-<maml:Description><maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xLabel</maml:name>
-<maml:Description><maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Sum</maml:name>
-<maml:Description><maml:para>Instead of getting a property for each xLabel value, return a total sum of each. The parameter value is the object property to measure.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Format</maml:name>
-<maml:Description><maml:para>If using -Sum the default output is typically bytes, depending on the object. Use KB, MB, GB or TB to reformat the sum accordingly.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Round</maml:name>
-<maml:Description><maml:para>Use this value to round a sum, especially if you are formatting it to something like KB.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-<dev:type><maml:name>Int32</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>0</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Sort</maml:name>
-<maml:Description><maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SortKey</maml:name>
-<maml:Description><maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>Value</dev:defaultValue>
-</command:parameter>
-</command:syntaxItem>
-</command:syntax>
-<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Data</maml:name>
-<maml:Description><maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-<dev:type><maml:name>Object</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yLabel</maml:name>
-<maml:Description><maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>yProperty</maml:name>
-<maml:Description><maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xLabel</maml:name>
-<maml:Description><maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>xProperty</maml:name>
-<maml:Description><maml:para>The property name that you want to analyze for each object. This will be used for calculating table values. See help examples.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Count</maml:name>
-<maml:Description><maml:para>Instead of getting a property for each xLabel value, return a total count of each.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-<dev:type><maml:name>SwitchParameter</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>False</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Sum</maml:name>
-<maml:Description><maml:para>Instead of getting a property for each xLabel value, return a total sum of each. The parameter value is the object property to measure.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Format</maml:name>
-<maml:Description><maml:para>If using -Sum the default output is typically bytes, depending on the object. Use KB, MB, GB or TB to reformat the sum accordingly.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Round</maml:name>
-<maml:Description><maml:para>Use this value to round a sum, especially if you are formatting it to something like KB.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-<dev:type><maml:name>Int32</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>0</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Sort</maml:name>
-<maml:Description><maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>None</dev:defaultValue>
-</command:parameter>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SortKey</maml:name>
-<maml:Description><maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-<dev:type><maml:name>String</maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue>Value</dev:defaultValue>
-</command:parameter>
-</command:parameters>
-<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
-</dev:type>
-<maml:description><maml:para>This command does not accept any pipelined input.
-</maml:para>
-</maml:description>
-</command:inputType>
-</command:inputTypes>
-<command:returnValues><command:returnValue><dev:type><maml:name>PSCustomObject</maml:name>
-</dev:type>
-<maml:description><maml:para>This command writes a custom object to the pipeline.
-</maml:para>
-</maml:description>
-</command:returnValue>
-</command:returnValues>
-<maml:alertSet><maml:alert><maml:para>
-NAME:     New-PSPivotTable
-AUTHOR:   Jeffery Hicks (@JeffHicks)
-VERSION:  2.1.3
-LASTEDIT: 8 September 2016
-</maml:para>
-<maml:para>This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/
-</maml:para>
-<maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
-</maml:para>
-<maml:para>Thanks to kdoblosky for contributing to this module.
-</maml:para>
-</maml:alert>
-</maml:alertSet>
-<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $svc="Lanmanserver","Wuauserv","DNS","ADWS"
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-PSPivotTable</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>PSPivotTable</command:noun>
+      <maml:description>
+        <maml:para>Create a pivot table in the PowerShell console from PowerShell commands.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command takes the result of a PowerShell expression and creates a pivot table object. You can use this object to analyze data patterns. For example, you could get a directory listing and then prepare a table showing the size of different file extensions for each folder.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-PSPivotTable</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Data</maml:name>
+          <maml:Description>
+            <maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yLabel</maml:name>
+          <maml:Description>
+            <maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yProperty</maml:name>
+          <maml:Description>
+            <maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>xLabel</maml:name>
+          <maml:Description>
+            <maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>xProperty</maml:name>
+          <maml:Description>
+            <maml:para>The property name that you want to analyze for each object. This will be used for calculating table values. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-PSPivotTable</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Data</maml:name>
+          <maml:Description>
+            <maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yLabel</maml:name>
+          <maml:Description>
+            <maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yProperty</maml:name>
+          <maml:Description>
+            <maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>xLabel</maml:name>
+          <maml:Description>
+            <maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Count</maml:name>
+          <maml:Description>
+            <maml:para>Instead of getting a property for each xLabel value, return a total count of each.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Sort</maml:name>
+          <maml:Description>
+            <maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SortKey</maml:name>
+          <maml:Description>
+            <maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Value</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-PSPivotTable</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>Data</maml:name>
+          <maml:Description>
+            <maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yLabel</maml:name>
+          <maml:Description>
+            <maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>yProperty</maml:name>
+          <maml:Description>
+            <maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>xLabel</maml:name>
+          <maml:Description>
+            <maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Sum</maml:name>
+          <maml:Description>
+            <maml:para>Instead of getting a property for each xLabel value, return a total sum of each. The parameter value is the object property to measure.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Format</maml:name>
+          <maml:Description>
+            <maml:para>If using -Sum the default output is typically bytes, depending on the object. Use KB, MB, GB or TB to reformat the sum accordingly.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Round</maml:name>
+          <maml:Description>
+            <maml:para>Use this value to round a sum, especially if you are formatting it to something like KB.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Sort</maml:name>
+          <maml:Description>
+            <maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SortKey</maml:name>
+          <maml:Description>
+            <maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Value</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Data</maml:name>
+        <maml:Description>
+          <maml:para>This is the collection of data object to analyze. You must enter a parameter value. See help examples.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>yLabel</maml:name>
+        <maml:Description>
+          <maml:para>This is an alternative value for the the "Y-Axis". If you don't specify a value then the yProperty value will be used. Use this parameter when you want to rename a property value such as Machinename to Computername.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>yProperty</maml:name>
+        <maml:Description>
+          <maml:para>The property name to pivot on. This is the "Y-Axis" of the pivot table.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>xLabel</maml:name>
+        <maml:Description>
+          <maml:para>The property name that you want to pivot on horizontally. The value of each corresponding object property becomes the label on the "X-Axis". For example, if the Data is a collection of service objects and xLabel is Name, each column will be labeled with the name of a service object, e.g. Alerter or BITS. See help examples.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>xProperty</maml:name>
+        <maml:Description>
+          <maml:para>The property name that you want to analyze for each object. This will be used for calculating table values. See help examples.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Count</maml:name>
+        <maml:Description>
+          <maml:para>Instead of getting a property for each xLabel value, return a total count of each.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Sum</maml:name>
+        <maml:Description>
+          <maml:para>Instead of getting a property for each xLabel value, return a total sum of each. The parameter value is the object property to measure.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Format</maml:name>
+        <maml:Description>
+          <maml:para>If using -Sum the default output is typically bytes, depending on the object. Use KB, MB, GB or TB to reformat the sum accordingly.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Round</maml:name>
+        <maml:Description>
+          <maml:para>Use this value to round a sum, especially if you are formatting it to something like KB.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Sort</maml:name>
+        <maml:Description>
+          <maml:para>You have the option of sorting results when using -Count or -Sum. You can sort on the value, i.e. count or sum, or on the property name. The default sort option is none but you can specify Ascending or Descending.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SortKey</maml:name>
+        <maml:Description>
+          <maml:para>Specify if you want to sort on the value or property name. The default is Value. This parameter has no effect unless you also use -Sort.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Value</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This command does not accept any pipelined input.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSCustomObject</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This command writes a custom object to the pipeline.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>* NAME    : New-PSPivotTable</maml:para>
+        <maml:para>* AUTHOR  : Jeffery Hicks (@JeffHicks)</maml:para>
+        <maml:para>* VERSION : 2.1.5</maml:para>
+        <maml:para>* UPDATED : 8 September 2016</maml:para>
+        <maml:para></maml:para>
+        <maml:para>This function was first published and described at http://jdhitsolutions.com/blog/powershell/2434/powershell-pivot-tables/</maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+        <maml:para>Thanks to kdoblosky for contributing to this module.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <dev:code>PS C:\&gt; $svc="Lanmanserver","Wuauserv","DNS","ADWS"
 PS C:\&gt; $computers="chi-dc01","chi-dc02","chi-dc04"
 PS C:\&gt; $data = Get-Service -name $svc -ComputerName $computers
 PS C:\&gt; New-PSPivotTable $data -ylabel Computername -yProperty Machinename -xlabel Name -xproperty Status | format-table -autosize
@@ -346,30 +453,33 @@ Computername    ADWS     DNS Lanmanserver Wuauserv
 chi-dc01     Running Running      Running  Running
 chi-dc02     Running Stopped      Running  Running
 chi-dc04     Running Running      Running  Stopped</dev:code>
-<dev:remarks><maml:para>Create a table that shows the status of each service on each computer. The yLabel parameter renames the property so that instead of Machinename it shows Computername.  The xLabel is the property name to analyze, in this case the service name. The xProperty value of each service becomes the table value.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $files = dir c:\scripts -include *.ps1,*.txt,*.zip,*.bat -recurse
+        <dev:remarks>
+          <maml:para>Create a table that shows the status of each service on each computer. The yLabel parameter renames the property so that instead of Machinename it shows Computername.  The xLabel is the property name to analyze, in this case the service name. The xProperty value of each service becomes the table value.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <dev:code>PS C:\&gt; $files = dir c:\scripts -include *.ps1,*.txt,*.zip,*.bat -recurse
 PS C:\&gt; New-PSPivotTable $files -yProperty Parent -xLabel Extension -count | Export-CSV -path c:\work\scriptdir.csv -notypeinformation</dev:code>
-<dev:remarks><maml:para>Create a report that shows the count of each file type in each top level directory and export to a CSV file.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $files = (dir -path c:\scripts -file).Where({$_.extension -match "ps1|txt|zip|bat|xml"})
+        <dev:remarks>
+          <maml:para>Create a report that shows the count of each file type in each top level directory and export to a CSV file.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <dev:code>PS C:\&gt; $files = (dir -path c:\scripts -file).Where({$_.extension -match "ps1|txt|zip|bat|xml"})
 PS C:\&gt; New-PSPivotTable $files -yProperty Directory -xlabel Extension -Sum Length -round 2 -format kb | format-table -auto 
 
 Directory      .TXT   .PS1      .XML   .ZIP  .BAT .PS1XML
 ---------      ----   ----      ----   ----  ---- -------
 C:\scripts 30422.99 9494.2 270941.55 159.71 26.62  139.57</dev:code>
-<dev:remarks><maml:para>Analyse files by extension, measuring the total size of each extension. The value is formatted as KB to 2 decimal points.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
-<dev:code>PS C:\&gt; New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
+        <dev:remarks>
+          <maml:para>Analyse files by extension, measuring the total size of each extension. The value is formatted as KB to 2 decimal points.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 4</maml:title>
+        <dev:code>PS C:\&gt; New-PSPivotTable $files -yProperty Directory -xLabel Extension -Count -Sort Ascending
 
 Directory : C:\scripts
 .ZIP      : 15
@@ -378,15 +488,15 @@ Directory : C:\scripts
 .XML      : 121
 .TXT      : 480
 .PS1      : 2288</dev:code>
-<dev:remarks><maml:para>Process the collection of script files and analyze by the count of each file type. The result is sorted by the count value in ascending order. Note that the actual output would include the period as part of the extension.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 5 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $files = dir c:\scripts -recurse -File | 
-Select *, @{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
-@{Name="Bucket";Expression={
-Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
+        <dev:remarks>
+          <maml:para>Process the collection of script files and analyze by the count of each file type. The result is sorted by the count value in ascending order. Note that the actual output would include the period as part of the extension.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 5</maml:title>
+        <dev:code>PS C:\&gt; $files = dir c:\scripts -recurse -File | Select *, 
+@{Name="Age";Expression={(Get-Date)-$_.LastWriteTime}},
+@{Name="Bucket";Expression={Switch([int]((Get-Date)-$_.LastWriteTime).TotalDays) {
 {$_ -gt 365} {'365Plus' ; Break}
 {$_ -gt 180 -AND $_ -le 365} {'1Yr' ; Break}
 {$_ -gt 90 -AND $_ -le 180} {'6Mo' ; Break}
@@ -398,18 +508,20 @@ Default { 'Today' }
 }}
 
 PS C:\&gt; New-PSPivotTable $files -yProperty Directory -xLabel Bucket -count | Out-GridView -title "File Aging"</dev:code>
-<dev:remarks><maml:para>Get all files and include some aging information based on the last write time. Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 6 --------------------------</maml:title>
-<dev:code>PS C:\&gt; New-PSPivotTable -Data (get-eventlog system -newest 1000) -Count -yProperty EntryType -xLabel Source | Out-Gridview -title 'System Sources'</dev:code>
-<dev:remarks><maml:para>Create a pivot table with a Y column of Entry Type and the X axis labels of the different sources based on the 1000 newest system event logs. The value under each column will be the total count of entries by source. The results are piped to Out-Gridview for viewing and further sorting or filtering.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 7 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $e = get-eventlog system -newest 1000 -entrytype Error
+        <dev:remarks>
+          <maml:para>Get all files and include some aging information based on the last write time. Then create a pivot table on the directory and aging buckets and display results with Out-Gridview.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 6</maml:title>
+        <dev:code>PS C:\&gt; New-PSPivotTable -Data (get-eventlog system -newest 1000) -Count -yProperty EntryType -xLabel Source | Out-Gridview -title 'System Sources'</dev:code>
+        <dev:remarks>
+          <maml:para>Create a pivot table with a Y column of Entry Type and the X axis labels of the different sources based on the 1000 newest system event logs. The value under each column will be the total count of entries by source. The results are piped to Out-Gridview for viewing and further sorting or filtering.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 7</maml:title>
+        <dev:code>PS C:\&gt; $e = get-eventlog system -newest 1000 -entrytype Error
 PS C:\&gt; New-PSPivotTable $e -yProperty EntryType -xLabel Source -count -sort Descending
 
 EntryType                             : Error
@@ -425,12 +537,13 @@ MICROSOFT-WINDOWS-NDIS                : 1
 AX88179                               : 1
 BUGCHECK                              : 1
 MICROSOFT-WINDOWS-HYPER-V-VMSWITCH    : 1</dev:code>
-<dev:remarks><maml:para>Create a pivot table on the error source, sorted by count in descending order.
-</maml:para>
-</dev:remarks>
-</command:example>
-<command:example><maml:title>-------------------------- EXAMPLE 8 --------------------------</maml:title>
-<dev:code>PS C:\&gt; $k = Get-Eventlog -source *kernel* -logname System
+        <dev:remarks>
+          <maml:para>Create a pivot table on the error source, sorted by count in descending order.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 8</maml:title>
+        <dev:code>PS C:\&gt; $k = Get-Eventlog -source *kernel* -logname System
 PS C:\&gt; New-PSPivotTable $k -yProperty EntryType -xLabel Source -count -sort Ascending -SortKey Name
 
 EntryType                                : Information
@@ -460,20 +573,24 @@ MICROSOFT-WINDOWS-KERNEL-GENERAL         : 9
 MICROSOFT-WINDOWS-KERNEL-PNP             : 0
 MICROSOFT-WINDOWS-KERNEL-POWER           : 0
 MICROSOFT-WINDOWS-KERNEL-PROCESSOR-POWER : 0</dev:code>
-<dev:remarks><maml:para>Create a variable of all entries where the source includes 'kernel' in the name. Then create a pivot table for each entry type showing the count of each source. The results are sorted by the source name.
-</maml:para>
-</dev:remarks>
-</command:example>
-</command:examples>
-<command:relatedLinks><maml:navigationLink><maml:linkText>Measure-Object</maml:linkText>
-<maml:uri></maml:uri>
-</maml:navigationLink>
-<maml:navigationLink><maml:linkText>Group-Object</maml:linkText>
-<maml:uri></maml:uri>
-</maml:navigationLink>
-<maml:navigationLink><maml:linkText>Select-Object</maml:linkText>
-<maml:uri></maml:uri>
-</maml:navigationLink>
-</command:relatedLinks>
-</command:command>
+        <dev:remarks>
+          <maml:para>Create a variable of all entries where the source includes 'kernel' in the name. Then create a pivot table for each entry type showing the count of each source. The results are sorted by the source name.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Measure-Object</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Group-Object</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Select-Object</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
 </helpItems>
